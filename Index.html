@@ -1,1 +1,78 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentic AI System</title>
+
+<style>
+body {
+  margin:0;
+  font-family: Arial;
+  background:#0f172a;
+  color:white;
+  text-align:center;
+}
+
+.container {max-width:600px;margin:auto;padding:20px;}
+.box {background:#1e293b;padding:20px;border-radius:10px;}
+input {width:90%;padding:12px;margin:10px 0;}
+button {padding:10px 20px;}
+#out {margin-top:15px;color:#38bdf8;}
+a {display:block;margin-top:20px;color:yellow;}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🤖 Agentic AI System</h1>
+
+<div class="box">
+
+<input id="q" placeholder="Ask AI...">
+<br>
+<button onclick="agent()">Ask</button>
+
+<p id="out"></p>
+
+</div>
+
+<a href="YOUR_BLOGGER_URL" target="_blank">
+📚 Open Knowledge Brain
+</a>
+
+</div>
+
+<script>
+
+async function agent() {
+
+  let q = document.getElementById("q").value.toLowerCase();
+
+  let reply = "Try: HTML, CSS, JavaScript, SEO";
+
+  // ================= AGENT LOGIC =================
+  if(q.includes("html")) reply = "HTML builds structure.";
+  else if(q.includes("css")) reply = "CSS designs UI.";
+  else if(q.includes("javascript")) reply = "JS adds logic.";
+  else if(q.includes("seo")) reply = "SEO improves ranking.";
+  else if(q.includes("learn")) reply = "Start HTML → CSS → JS → SEO";
+
+  // ================= FETCH GITHUB MEMORY =================
+  let memory = await fetch(
+    "https://raw.githubusercontent.com/YOUR_USER/agentic-ai-memory/main/memory.json"
+  )
+  .then(r => r.json())
+  .catch(() => ({skills: []}));
+
+  reply += "\n\n📦 Memory Skills: " + memory.skills.join(", ");
+
+  document.getElementById("out").innerText = reply;
+}
+
+</script>
+
+</body>
+</html>
